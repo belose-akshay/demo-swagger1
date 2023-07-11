@@ -1,50 +1,4 @@
-<<<<<<< HEAD
-# Swagger YAML file with demonstration examples.
-# Be aware that YAML has indentation based scoping.
-#
-# Code completion support is available in the swagger: "2.0"
-# editor, and many editors, so you can try typing to see options.
-
-# Set the Swagger specification version, which is currently 2.0.
-# To find the current version, see https://swagger.io
-swagger: '2.0'
-
-# This is your document metadata, which is the information
-# about your specific API that is contained in this file.
-info:
-  title: Demo Swagger
-  description: Demonstration of Swagger specification
-  # We use semantic versioning; see https://semver.org/
-  # For practical reasons, we recommend use the version
-  # number 1.0.0 as soon as the API is stable for users.
-  # Before the API is stable, use a number less than 1.
-  version: "0.0.0"
-
-# The scheme we want is HTTPS for secure web services
-# The host is our fully qualified host name,
-# and the base path is our web service URL path.
-schemes:
-  - https
-
-# The host and base path of your API both control
-# what an API URL will look like for a typical user.
-#
-# Some teams like to use URLs that prepend with "api"
-# such as "api.example.com"; other teams like to use
-# URLS that append "api" such as "example.com/api".
-#
-# Our preference is to omit the word "api" in the URL,
-# because we like to use an entire host for the API.
-# If your host needs to support multiple APIs, or an
-# typical web application plus an API, then you may 
-# want to put "api" somewhere in the host or base path.
-host: demo.example.com
-basePath: /
-
-# Define the MIME content types that this API consumes 
-# and produces. This demo is a typical JSON REST API,
-# so we list the two common JSON MIME types.
-=======
+---
 swagger: "2.0"
 info:
   title: Demo Swagger
@@ -54,89 +8,19 @@ schemes:
   - https
 host: demo.example.com
 basePath: /
->>>>>>> Add more examples
 consumes:
   - application/vnd.api+json
   - application/json
 produces:
   - application/vnd.api+json
   - application/json
-<<<<<<< HEAD
-
-# Describe the API paths i.e. the API endpoints.
-#
-# The paths section tends to be the largest section
-# in a typical Swagger file, because it defines all the
-# endpoints of the API as well as describes all the inputs
-# and outputs such as query parameters and input fields.
-#
-# Each path is essentially a URL route. For example, we define
-# a path "/items", and it would be usable by creating a URL that
-# uses the host and basename, then appends the path.
-#
-# For example, if the scheme is "https", and the host is "foo.com"
-# and the base path is "/bar", and the path is "/items", then the
-# resulting URL is "https://foo.com/bar/items".
 paths:
-  # Each entry in this section at this level is a path endpoint.
-  # A typical REST endpoint with typical URLs uses plural routes.
-  # For example, we define "/persons" as the route, not "/person".
-  /persons:
-    # This is a HTTP operation. 
-    # The HTTP operation is typically either "get" or "put".
-    get:
-      # Describe this verb here. Note: you can use plain text,
-      # or markdown, or even typical HTML if it is quoted.
-      # Swagger YAML has a syntax where you can wrap lines by
-      # starting with a pipe symbol, but we prefer to use typiocal
-      # double-quoted syntax because the Swagger editor has issues
-      # with color highlighting of pipe symbol text.
-      description: "Gets `Person` objects. Optional query param of **size** determines the size of the returned array"
-      # Swagger documentation generators use tags as navigation
-      # aids, such as a documentation web page showing a list of
-      # clickable tags that navigate to those sections of the docs.
-      # For this demo, we use tags that correspond to the object model.
-      # For example, all our item-related paths use the tag "Items".
-      # We prefer to use sentence-case tags, rather than lower-case tags,
-      # because it makes the documentation a little bit prettier.
-      tags:
-        - Persons
-      # This is an array of GET operation parameters.
-      # The parameters specify the route's potential query parameters.
-      parameters:
-        # An example parameter that is in query and is required
-        -
-          name: size
-          in: query
-          description: Size of array
-          required: true
-          type: number
-          format: double
-      # Expected responses for this operation:
-      responses:
-        # Response code
-        200:
-          description: Successful response
-          # A schema describing your response object.
-          # Use JSON Schema format
-          schema:
-            title: ArrayOfPersons
-            type: array
-            items:
-              title: Person
-              type: object
-              properties:
-                name:
-                  type: string
-                single:
-                  type: boolean
-                  
-=======
-paths:
-  "/users":
+  /users:
     get:
       summary: Get a list of users
-      description: "<p>Get a list of users.</p>\n<p><a href=\"examples/users/list.html\">Examples</a></p>\n"
+      description: |
+        <p>Get a list of users.</p>
+        <p><a href="examples/users/list.html">Examples</a></p>
       tags:
         - Users
       parameters:
@@ -154,7 +38,9 @@ paths:
       summary: Create one user.
       tags:
         - Users
-      description: "<p>Create one user.</p>\n<p><a href=\"examples/users/create.html\">Examples</a></p>\n"
+      description: |
+        <p>Create one user.</p>
+        <p><a href="examples/users/create.html">Examples</a></p>
       parameters:
         - $ref: "#/parameters/authentication_token"
         - $ref: "#/parameters/name_input_required"
@@ -173,7 +59,9 @@ paths:
   "/users/{id}":
     get:
       summary: Get one user
-      description: "<p>Get one user.</p>\n<p><a href=\"examples/users/show.html\">Examples</a></p>\n"
+      description: |
+        <p>Get one user.</p>
+        <p><a href="examples/users/show.html">Examples</a></p>
       tags:
         - users
       parameters:
@@ -186,12 +74,14 @@ paths:
             $ref: "#/definitions/user-response-data"
         default:
           $ref: "#/responses/error"
-  "/items":
+  /items:
     get:
       summary: Get a list of items.
       tags:
         - Items
-      description: "<p>Get a list of items.</p>\n<p><a href=\"examples/items/list.html\">Examples</a></p>\n"
+      description: |
+        <p>Get a list of items.</p>
+        <p><a href="examples/items/list.html">Examples</a></p>
       parameters:
         - $ref: "#/parameters/authentication_token"
         - $ref: "#/parameters/sort_query"
@@ -212,7 +102,9 @@ paths:
       summary: Create one item.
       tags:
         - Items
-      description: "<p>Create one item.</p>\n<p><a href=\"examples/items/create.html\">Examples</a></p>\n"
+      description: |
+        <p>Create one item.</p>
+        <p><a href="examples/items/create.html">Examples</a></p>
       parameters:
         - $ref: "#/parameters/authentication_token"
         - $ref: "#/parameters/name_input_required"
@@ -233,7 +125,9 @@ paths:
       summary: Get one item.
       tags:
         - Items
-      description: "<p>Get one item.</p>\n<p><a href=\"examples/items/show.html\">Examples</a></p>\n"
+      description: |
+        <p>Get one item.</p>
+        <p><a href="examples/items/show.html">Examples</a></p>
       parameters:
         - $ref: "#/parameters/authentication_token"
         - $ref: "#/parameters/id_path"
@@ -246,10 +140,12 @@ paths:
               $ref: "#/definitions/items"
         default:
           $ref: "#/responses/error"
-  "/sessions":
+  /sessions:
     get:
       summary: Get a list of sessions
-      description: "<p>Get a list of sessions.</p>\n<p><a href=\"examples/sesssions/index.html\">Examples</a></p>\n"
+      description: |
+        <p>Get a list of sessions.</p>
+        <p><a href="examples/sesssions/index.html">Examples</a></p>
       tags:
         - Sessions
       parameters:
@@ -270,7 +166,10 @@ paths:
           $ref: "#/responses/error"
     put:
       summary: Create a session
-      description: "<p>Create a session.</p>\n<p>The response contains the secure authentication token.</p>\n<p><a href=\"examples/sesssions/create.html\">Examples</a></p>\n"
+      description: |
+        <p>Create a session.</p>
+        <p>The response contains the secure authentication token.</p>
+        <p><a href="examples/sesssions/create.html">Examples</a></p>
       tags:
         - Sessions
       parameters:
@@ -290,20 +189,26 @@ parameters:
   authentication_token:
     name: AUTHENTICATION-TOKEN
     in: header
-    description: "<p>Authentication token that verifies the app request is approved.</p>\n<p>Example: 25ded48cf49bf9713e02b2f02e614f13.</p>\n"
+    description: |
+      <p>Authentication token that verifies the app request is approved.</p>
+      <p>Example: 25ded48cf49bf9713e02b2f02e614f13.</p>
     type: string
     format: zid
     required: true
   id_path:
     name: id
-    description: "<p>Id.</p>\n<p>Example: 12345.</p>\n"
+    description: |
+      <p>Id.</p>
+      <p>Example: 12345.</p>
     type: integer
     format: id
     in: path
     required: true
   limit_query:
     name: limit
-    description: "<p>Limit the number of records in the result set.</p>\n<p>Example: 10 means return at most 10 results.</p>\n"
+    description: |
+      <p>Limit the number of records in the result set.</p>
+      <p>Example: 10 means return at most 10 results.</p>
     type: integer
     format: count
     in: query
@@ -312,21 +217,27 @@ parameters:
     default: 10
   name_input:
     name: name
-    description: "<p>Name.</p>\n<p>Example: \"Foo\".</p>\n"
+    description: |
+      <p>Name.</p>
+      <p>Example: "Foo".</p>
     type: string
     format: freeform
     in: formData
     required: false
   note_input:
     name: note
-    description: "<p>Note.</p>\n<p>Example: \"This is an example note\".</p>\n"
+    description: |
+      <p>Note.</p>
+      <p>Example: "This is an example note".</p>
     type: string
     format: freeform
     in: formData
     required: false
   offset_query:
     name: offset
-    description: "<p>Offset records.</p>\n<p>Example: 10 means retrieve the 10th result onward.</p>\n"
+    description: |
+      <p>Offset records.</p>
+      <p>Example: 10 means retrieve the 10th result onward.</p>
     type: integer
     format: count
     in: query
@@ -334,8 +245,10 @@ parameters:
     minimum: 0
     default: 0
   page_number_query:
-    name: "page[number]"
-    description: "<p>Pagination page number to return.</p>\n<p>Example: 10 means retrieve the 10th page onward.</p>\n"
+    name: page[number]
+    description: |
+      <p>Pagination page number to return.</p>
+      <p>Example: 10 means retrieve the 10th page onward.</p>
     type: integer
     format: count
     in: query
@@ -343,8 +256,10 @@ parameters:
     minimum: 1
     default: 1
   page_size_query:
-    name: "page[size]"
-    description: "<p>Pagination number of items per page to return.</p>\n<p>Example: 10 means retrieve 10 results per page.</p>\n"
+    name: page[size]
+    description: |
+      <p>Pagination number of items per page to return.</p>
+      <p>Example: 10 means retrieve 10 results per page.</p>
     type: integer
     format: count
     in: query
@@ -353,21 +268,35 @@ parameters:
     default: 10
   tagging_input:
     name: tagging
-    description: "<p>Tagging list.</p>\n<p>Example: \"foo, goo, hoo\".</p>\n<p>The tagging list is comma-separated, and spaces-optional, and case-insenstive.</p>\n"
+    description: >
+      <p>Tagging list.</p>
+
+      <p>Example: "foo, goo, hoo".</p>
+
+      <p>The tagging list is comma-separated, and spaces-optional, and case-insenstive.</p>
     type: string
     format: freeform
     in: formData
     required: false
   type_input_required:
     name: type
-    description: "<p>The JSON API resource data type name.</p>\n<p>Example: \"users\".</p>\n<p>This must match the <a href=\"http://jsonapi.org/format\">JSON API format</a></p>\n"
+    description: >
+      <p>The JSON API resource data type name.</p>
+
+      <p>Example: "users".</p>
+
+      <p>This must match the <a href="http://jsonapi.org/format">JSON API format</a></p>
     type: string
     format: freeform
     in: formData
     required: true
   sort_query:
     name: sort
-    description: "<p>Sort results by this parameter, which is a comma separated list of attributes, each preceeded by a plus sign or minus sign.</p>\n<p>Example: \"+foo,-goo\" sorts by ascending \"foo\" field the by descending \"goo\" field.</p>\n"
+    description: >
+      <p>Sort results by this parameter, which is a comma separated list
+      of attributes, each preceeded by a plus sign or minus sign.</p>
+
+      <p>Example: "+foo,-goo" sorts by ascending "foo" field the by descending "goo" field.</p>
     type: string
     format: bbSort
     in: query
@@ -434,7 +363,7 @@ definitions:
         $ref: "#/definitions/created_at"
       updated_at:
         $ref: "#/definitions/updated_at"
-      updated_at:
+      deleted_at:
         $ref: "#/definitions/deleted_at"
       image_url:
         $ref: "#/definitions/image_url"
@@ -491,39 +420,49 @@ definitions:
   type:
     type: string
     format: freeform
-    description: "Type of resource. IE: \"addresses\"."
+    description: 'Type of resource. IE: "addresses".'
   uri:
     type: string
     format: url
-    description: "Link to uri . IE: \"http://test.host/api/addresses/172176\"."
+    description: 'Link to uri . IE: "http://test.host/api/addresses/172176".'
   uri_with_pagination:
     type: string
     format: url
-    description: "Link to uri with pagination query params?page%5Bnumber%5D=1&page%5Bsize%5D=10 . IE: \"http://test.host/api/addresses/172176\"."
+    description: 'Link to uri with pagination query
+      params?page%5Bnumber%5D=1&page%5Bsize%5D=10 . IE:
+      "http://test.host/api/addresses/172176".'
   created_at:
     type: string
     format: timestamp
-    description: "<p>Created at datetime.</p>\n<p>Example: \"2015-01-20T08:40:10.686-08:00\".</p>\n"
+    description: |
+      <p>Created at datetime.</p>
+      <p>Example: "2015-01-20T08:40:10.686-08:00".</p>
   id:
     type: string
     format: zid
-    description: "Resource id, ie: \"25\"."
+    description: 'Resource id, ie: "25".'
   scheduled_for:
     type: string
     format: dateTime
-    description: "ISO formatted date, ex '2015-04-28T10:00:00.000-07:00'"
+    description: ISO formatted date, ex '2015-04-28T10:00:00.000-07:00'
   image_url:
     type: string
     format: url
-    description: "<p>Image URL.</p>\n<p>Example: \"http://example.com/image.png\".</p>\n"
+    description: |
+      <p>Image URL.</p>
+      <p>Example: "http://example.com/image.png".</p>
   updated_at:
     type: string
     format: timestamp
-    description: "<p>Updated at datetime.</p>\n<p>Example: \"2015-01-20T08:40:10.686-08:00\".</p>\n"
+    description: |
+      <p>Updated at datetime.</p>
+      <p>Example: "2015-01-20T08:40:10.686-08:00".</p>
   zid:
     type: string
     format: zid
-    description: "<p>ZID. A string that is a secure random 32-character hex string.</p>\n<p>Example: \"e25ade5d2cf38e7ca70c72cf0a432ba4\".</p>"
+    description: |-
+      <p>ZID. A string that is a secure random 32-character hex string.</p>
+      <p>Example: "e25ade5d2cf38e7ca70c72cf0a432ba4".</p>
   error:
     type: object
     required:
@@ -534,19 +473,24 @@ definitions:
         description: A unique identifier for this particular occurance of the error
         type: string
       href:
-        description: A url the may yield further details about this particular occurance of the error
+        description: A url the may yield further details about this particular occurance
+          of the error
         type: string
       status:
-        description: "The HTTP status code applicable to this problem, expressed as a string value."
+        description: The HTTP status code applicable to this problem, expressed as a
+          string value.
         type: string
       code:
-        description: "An application-specific error code, expressed as a string value."
+        description: An application-specific error code, expressed as a string value.
         type: string
       title:
-        description: "A short, human-readable summary of the problem. It SHOULD NOT change from occurrence to occurrence of the problem, except for purposes of localization."
+        description: A short, human-readable summary of the problem. It SHOULD NOT
+          change from occurrence to occurrence of the problem, except for
+          purposes of localization.
         type: string
       detail:
-        description: A human-readable explanation specific to this occurrence of the problem.
+        description: A human-readable explanation specific to this occurrence of the
+          problem.
         type: string
   errors:
     type: object
@@ -614,14 +558,18 @@ definitions:
       name:
         type: string
         format: freeform
-        description: "<p>Name.</p>\n<p>Example: \"Alice Anderson\".</p>\n"
+        description: |
+          <p>Name.</p>
+          <p>Example: "Alice Anderson".</p>
       note:
         type: string
         format: email
-        description: "<p>Note.</p>\n<p>Example: \"alice@example.com\".</p>\n"
+        description: |
+          <p>Note.</p>
+          <p>Example: "alice@example.com".</p>
 responses:
   error:
     description: Error
     schema:
       $ref: "#/definitions/errors"
->>>>>>> Add more examples
+
